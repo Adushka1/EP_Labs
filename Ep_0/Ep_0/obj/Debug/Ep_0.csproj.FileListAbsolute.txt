@@ -1,7 +1,0 @@
-C:\Users\1\Documents\Visual Studio 2017\Projects\Ep_0\Ep_0\bin\Debug\Ep_0.exe.config
-C:\Users\1\Documents\Visual Studio 2017\Projects\Ep_0\Ep_0\bin\Debug\Ep_0.exe
-C:\Users\1\Documents\Visual Studio 2017\Projects\Ep_0\Ep_0\bin\Debug\Ep_0.pdb
-C:\Users\1\Documents\Visual Studio 2017\Projects\Ep_0\Ep_0\obj\Debug\Ep_0.csprojAssemblyReference.cache
-C:\Users\1\Documents\Visual Studio 2017\Projects\Ep_0\Ep_0\obj\Debug\Ep_0.csproj.CoreCompileInputs.cache
-C:\Users\1\Documents\Visual Studio 2017\Projects\Ep_0\Ep_0\obj\Debug\Ep_0.exe
-C:\Users\1\Documents\Visual Studio 2017\Projects\Ep_0\Ep_0\obj\Debug\Ep_0.pdb
