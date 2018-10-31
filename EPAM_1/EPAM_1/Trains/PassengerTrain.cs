@@ -1,27 +1,24 @@
-﻿using EPAM_1.Locomotives.Interfaces;
-using EPAM_1.Trains.Interfaces;
-using EPAM_1.Wagons;
-using EPAM_1.Wagons.Interfaces;
+﻿using EPAM1.Wagons.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EPAM1.Locomotives.Interfaces;
+using EPAM1.Trains.Interfaces;
+using EPAM1.Wagons;
 
-namespace EPAM_1.Trains
+namespace EPAM1.Trains
 {
     public class PassengerTrain : ITrain<PassengerWagon>
     {
         public ILocomotive Locomotive { get; }
-        public ICollection<PassengerWagon> Wagons { get; private set; }
+        public ICollection<PassengerWagon> Wagons { get; set; }
 
-        public void SortbyComfort()
+        public void Sort(Func<PassengerWagon, int> comparerFunc)
         {
-            var sortedElements = Wagons.OrderBy(x => x.ComfortLevel);
-            foreach (var element in sortedElements)
-            {
-                Console.Write(element.ComfortLevel +" ");
-            }
+            Wagons=Wagons.OrderBy(comparerFunc).ToList();
+
         }
 
         public int GetPassengersAmount()
@@ -37,9 +34,9 @@ namespace EPAM_1.Trains
         public int GetBagageAmount()
         {
             int baggageAmount = 0;
-            foreach(var wagon in Wagons)
+            foreach (var wagon in Wagons)
             {
-               baggageAmount+=wagon.BaggageCount();
+                baggageAmount += wagon.BaggageCount();
             }
             return baggageAmount;
         }
@@ -64,7 +61,7 @@ namespace EPAM_1.Trains
         }
 
 
-        public PassengerTrain( ILocomotive locomotive)
+        public PassengerTrain(ILocomotive locomotive)
         {
             Wagons = new List<PassengerWagon>();
             Locomotive = locomotive;

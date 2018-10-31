@@ -1,12 +1,12 @@
-﻿using EPAM_1.Cargos;
-using EPAM_1.Wagons.Interfaces;
+﻿using EPAM1.Cargos;
+using EPAM1.Wagons.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EPAM_1.Wagons
+namespace EPAM1.Wagons
 {
     public class CoupeWagon : PassengerWagon
     {

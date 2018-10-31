@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EPAM_1.Wagons
+namespace EPAM1.Wagons
 {
     public class CouchetteWagon : PassengerWagon
     {
