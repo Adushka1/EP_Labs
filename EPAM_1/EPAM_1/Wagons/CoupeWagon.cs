@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace EPAM1.Wagons
 {
-    public class CoupeWagon : PassengerWagon
+    public sealed class CoupeWagon : PassengerWagon
     {
         public override int ComfortLevel { get; set; }
         public override int WagonCapacity { get; set; }
 
         public CoupeWagon(int elementsAmount, int wagonCapacity = 36) : base(elementsAmount, wagonCapacity = 36)
         {
+            if (wagonCapacity <= 0) throw new ArgumentOutOfRangeException(nameof(wagonCapacity));
             WagonCapacity = wagonCapacity;
             ComfortLevel = 80;
         }

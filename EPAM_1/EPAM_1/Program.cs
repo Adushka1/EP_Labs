@@ -22,6 +22,11 @@ namespace EPAM1
             PassengerWagon wagon2 = new CoupeWagon(15);
             PassengerWagon wagon3 = new CouchetteWagon(14);
 
+
+            passengerTrain.AddWagon(wagon);
+            passengerTrain.AddWagon(wagon2);
+            passengerTrain.AddWagon(wagon3);
+
             passengerTrain.Sort(x=>x.ComfortLevel);
 
             foreach (var element in passengerTrain.Wagons)
@@ -29,9 +34,6 @@ namespace EPAM1
                     Console.WriteLine(element.ElementsAmount);
             }
 
-            //passengerTrain.AddWagon(wagon);
-            //passengerTrain.AddWagon(wagon2);
-            //passengerTrain.AddWagon(wagon3);
             //Console.WriteLine(passengerTrain.GetPassengersAmount());
             //Console.WriteLine(passengerTrain.GetBagageAmount());
             //Console.WriteLine("Выводит количество пассажиров которые попадают в диапазон:");

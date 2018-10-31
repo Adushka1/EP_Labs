@@ -15,30 +15,21 @@ namespace EPAM1.Trains
         public ILocomotive Locomotive { get; }
         public ICollection<PassengerWagon> Wagons { get; set; }
 
+        public PassengerTrain(ILocomotive locomotive)
+        {
+            Wagons = new List<PassengerWagon>();
+            Locomotive = locomotive;
+        }
+
+        public int Count(Func<PassengerWagon, int> comparer)
+        {
+            return Wagons.Sum(comparer);
+        }
+
         public void Sort(Func<PassengerWagon, int> comparerFunc)
         {
-            Wagons=Wagons.OrderBy(comparerFunc).ToList();
+            Wagons = Wagons.OrderBy(comparerFunc).ToList();
 
-        }
-
-        public int GetPassengersAmount()
-        {
-            int passengersAmount = 0;
-            foreach (var wagon in Wagons)
-            {
-                passengersAmount += wagon.ElementCount();
-            }
-            return passengersAmount;
-        }
-
-        public int GetBagageAmount()
-        {
-            int baggageAmount = 0;
-            foreach (var wagon in Wagons)
-            {
-                baggageAmount += wagon.BaggageCount();
-            }
-            return baggageAmount;
         }
 
         public void RangeOutput(int firstElement, int secondElement)
@@ -58,13 +49,6 @@ namespace EPAM1.Trains
         public void RemoveWagon(PassengerWagon wagon)
         {
             Wagons.Remove(wagon);
-        }
-
-
-        public PassengerTrain(ILocomotive locomotive)
-        {
-            Wagons = new List<PassengerWagon>();
-            Locomotive = locomotive;
         }
     }
 }

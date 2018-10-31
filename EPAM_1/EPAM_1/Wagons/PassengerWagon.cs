@@ -14,7 +14,7 @@ namespace EPAM1.Wagons
         public abstract int ComfortLevel { get; set; }
         public abstract int WagonCapacity { get; set; }
         public int ElementsAmount { get; set; }
-        public ICollection<Passenger> Passengers { get; private set; }
+        public ICollection<Passenger> Passengers { get; }
 
         public int ElementCount()
         {
@@ -23,12 +23,7 @@ namespace EPAM1.Wagons
 
         public int BaggageCount()
         {
-            int baggageAmount = 0;
-            foreach (var passenger in Passengers)
-            {
-                baggageAmount += passenger.BaggageAmount;
-            }
-            return baggageAmount;
+            return Passengers.Sum(passenger => passenger.BaggageAmount);
         }
 
         public void AddPassenger(int baggageAmount)
@@ -44,20 +39,13 @@ namespace EPAM1.Wagons
             }
         }
 
-        public PassengerWagon(int elementsAmount, int wagonCapacity)
+        protected PassengerWagon(int elementsAmount, int wagonCapacity)
         {
             WagonCapacity = wagonCapacity;
 
-            if (elementsAmount > WagonCapacity)
-            {
-                Console.WriteLine("Wagon is overload");
-                ElementsAmount = WagonCapacity;
-            }
-            else ElementsAmount = elementsAmount;
-
             Passengers = new List<Passenger>(elementsAmount);
 
-            for (int i = 0; i < elementsAmount; i++)
+            for (var i = 0; i < elementsAmount; i++)
             {
                 Passengers.Add(new Passenger());
             }
