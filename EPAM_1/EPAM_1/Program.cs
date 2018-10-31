@@ -27,12 +27,9 @@ namespace EPAM1
             passengerTrain.AddWagon(wagon2);
             passengerTrain.AddWagon(wagon3);
 
-            passengerTrain.Sort(x=>x.ComfortLevel);
+            passengerTrain.
+           //Console.WriteLine(passengerTrain.Count(x => x.ElementsAmount));
 
-            foreach (var element in passengerTrain.Wagons)
-            {
-                    Console.WriteLine(element.ElementsAmount);
-            }
 
             //Console.WriteLine(passengerTrain.GetPassengersAmount());
             //Console.WriteLine(passengerTrain.GetBagageAmount());

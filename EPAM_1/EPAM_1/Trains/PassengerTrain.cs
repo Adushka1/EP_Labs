@@ -29,16 +29,11 @@ namespace EPAM1.Trains
         public void Sort(Func<PassengerWagon, int> comparerFunc)
         {
             Wagons = Wagons.OrderBy(comparerFunc).ToList();
-
         }
 
-        public void RangeOutput(int firstElement, int secondElement)
+        public ICollection<PassengerWagon> RangeOutput(int firstElement, int secondElement)
         {
-            var rangeElements = Wagons.Where(x => x.ElementsAmount > firstElement && x.ElementsAmount < secondElement);
-            foreach (var element in rangeElements)
-            {
-                Console.WriteLine(element.ElementsAmount);
-            }
+            return Wagons.Where(x => x.ElementsAmount > firstElement && x.ElementsAmount < secondElement).ToList();
         }
 
         public void AddWagon(PassengerWagon wagon)

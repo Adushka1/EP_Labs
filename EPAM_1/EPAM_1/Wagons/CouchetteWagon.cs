@@ -8,9 +8,6 @@ namespace EPAM1.Wagons
 {
     public class CouchetteWagon : PassengerWagon
     {
-        public override int ComfortLevel { get; set; }
-        public override int WagonCapacity { get; set; }
-
         public CouchetteWagon(int elementsAmount, int wagonCapacity = 54) : base(elementsAmount, wagonCapacity = 54)
         {
             WagonCapacity = wagonCapacity;

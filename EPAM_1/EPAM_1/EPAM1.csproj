@@ -55,7 +55,9 @@
     <Compile Include="Trains\PassengerTrain.cs" />
     <Compile Include="Wagons\CouchetteWagon.cs" />
     <Compile Include="Wagons\CoupeWagon.cs" />
+    <Compile Include="Wagons\CoveredWagon.cs" />
     <Compile Include="Wagons\Interfaces\IGoodsWagon.cs" />
+    <Compile Include="Wagons\Interfaces\IPassengerWagon.cs" />
     <Compile Include="Wagons\PassengerWagon.cs" />
     <Compile Include="Wagons\Interfaces\IWagon.cs" />
     <Compile Include="Wagons\TankWagon.cs" />
@@ -63,8 +65,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Coun\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

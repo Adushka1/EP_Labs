@@ -9,16 +9,16 @@ using EPAM1.Wagons.Interfaces;
 
 namespace EPAM1.Wagons
 {
-    public abstract class PassengerWagon : IWagon
+    public abstract class PassengerWagon : IPassengerWagon
     {
-        public abstract int ComfortLevel { get; set; }
-        public abstract int WagonCapacity { get; set; }
+        public int ComfortLevel { get; set; }
+        public int WagonCapacity { get; set; }
         public int ElementsAmount { get; set; }
         public ICollection<Passenger> Passengers { get; }
 
         public int ElementCount()
         {
-            return Passengers.Count();
+            return Passengers.Count;
         }
 
         public int BaggageCount()
@@ -42,7 +42,7 @@ namespace EPAM1.Wagons
         protected PassengerWagon(int elementsAmount, int wagonCapacity)
         {
             WagonCapacity = wagonCapacity;
-
+            ElementsAmount = elementsAmount;
             Passengers = new List<Passenger>(elementsAmount);
 
             for (var i = 0; i < elementsAmount; i++)

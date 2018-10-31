@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace EPAM1.Wagons.Interfaces
 {
-    public interface IGoodsWagon : IWagon
+    public interface IPassengerWagon : IWagon
     {
-
+        int BaggageCount();
+        void AddPassenger(int baggageAmount);
     }
 }
