@@ -1,0 +1,7 @@
+C:\Users\Adushka\EP_Labs\EPAM_1\EPAM_1\bin\Debug\EPAM1.exe.config
+C:\Users\Adushka\EP_Labs\EPAM_1\EPAM_1\bin\Debug\EPAM1.exe
+C:\Users\Adushka\EP_Labs\EPAM_1\EPAM_1\bin\Debug\EPAM1.pdb
+C:\Users\Adushka\EP_Labs\EPAM_1\EPAM_1\obj\Debug\EPAM1.csprojAssemblyReference.cache
+C:\Users\Adushka\EP_Labs\EPAM_1\EPAM_1\obj\Debug\EPAM1.csproj.CoreCompileInputs.cache
+C:\Users\Adushka\EP_Labs\EPAM_1\EPAM_1\obj\Debug\EPAM1.exe
+C:\Users\Adushka\EP_Labs\EPAM_1\EPAM_1\obj\Debug\EPAM1.pdb

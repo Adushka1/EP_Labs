@@ -1,15 +1,15 @@
-﻿using EPAM_1.Locomotives;
-using EPAM_1.Locomotives.Interfaces;
-using EPAM_1.Trains;
-using EPAM_1.Trains.Interfaces;
-using EPAM_1.Wagons;
+﻿using EPAM1.Trains.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EPAM1.Locomotives;
+using EPAM1.Locomotives.Interfaces;
+using EPAM1.Trains;
+using EPAM1.Wagons;
 
-namespace EPAM_1
+namespace EPAM1
 {
     class Program
     {
@@ -22,13 +22,20 @@ namespace EPAM_1
             PassengerWagon wagon2 = new CoupeWagon(15);
             PassengerWagon wagon3 = new CouchetteWagon(14);
 
-            passengerTrain.AddWagon(wagon);
-            passengerTrain.AddWagon(wagon2);
-            passengerTrain.AddWagon(wagon3);
-            Console.WriteLine(passengerTrain.GetPassengersAmount());
-            Console.WriteLine(passengerTrain.GetBagageAmount());
-            Console.WriteLine("Выводит количество пассажиров которые попадают в диапазон:");
-            passengerTrain.RangeOutput(13, 20); 
+            passengerTrain.Sort(x=>x.ComfortLevel);
+
+            foreach (var element in passengerTrain.Wagons)
+            {
+                    Console.WriteLine(element.ElementsAmount);
+            }
+
+            //passengerTrain.AddWagon(wagon);
+            //passengerTrain.AddWagon(wagon2);
+            //passengerTrain.AddWagon(wagon3);
+            //Console.WriteLine(passengerTrain.GetPassengersAmount());
+            //Console.WriteLine(passengerTrain.GetBagageAmount());
+            //Console.WriteLine("Выводит количество пассажиров которые попадают в диапазон:");
+            //passengerTrain.RangeOutput(13, 20); 
             
 
         }

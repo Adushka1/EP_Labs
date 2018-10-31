@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EPAM_1.Cargos.Interfaces
+namespace EPAM1.Cargos.Interfaces
 {
     public interface IBasicCargo
     {

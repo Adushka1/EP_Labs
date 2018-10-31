@@ -1,13 +1,13 @@
-﻿using EPAM_1.Cargos;
-using EPAM_1.Wagons.Interfaces;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EPAM1.Cargos;
+using EPAM1.Wagons.Interfaces;
 
-namespace EPAM_1.Wagons
+namespace EPAM1.Wagons
 {
     public abstract class PassengerWagon : IWagon
     {
