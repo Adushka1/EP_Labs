@@ -1,8 +1,8 @@
-﻿using EPAM1.Cargos.Interfaces;
+﻿
 
 namespace EPAM1.Cargos
 {
-    public class Baggage : IBasicCargo
+    public class Baggage
     {
         public int Weight { get; set; }
     }

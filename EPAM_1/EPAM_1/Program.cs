@@ -1,5 +1,4 @@
-﻿using EPAM1.Trains.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,27 +14,28 @@ namespace EPAM1
     {
         static void Main(string[] args)
         {
-            ILocomotive locomotive = new DiselLocomotive();
+            ILocomotive locomotive = new ElectricLocomotive();
             PassengerTrain passengerTrain = new PassengerTrain(locomotive);
-            PassengerWagon wagon = new CouchetteWagon(4);
-            wagon.AddPassenger(15);
-            PassengerWagon wagon2 = new CoupeWagon(15);
-            PassengerWagon wagon3 = new CouchetteWagon(14);
-
+            PassengerWagon wagon = new CouchetteWagon(elementsAmount: 54);
+            wagon.AddPassenger(baggageAmount: 14);
+            PassengerWagon wagon2 = new CoupeWagon(elementsAmount: 15);
+            wagon2.AddPassenger();
+            PassengerWagon wagon3 = new CouchetteWagon(elementsAmount: 1);
 
             passengerTrain.AddWagon(wagon);
             passengerTrain.AddWagon(wagon2);
             passengerTrain.AddWagon(wagon3);
 
-            passengerTrain.
-           //Console.WriteLine(passengerTrain.Count(x => x.ElementsAmount));
+            passengerTrain.Sort(x => x.ComfortLevel);
+            //  Console.WriteLine(passengerTrain);
 
-
-            //Console.WriteLine(passengerTrain.GetPassengersAmount());
-            //Console.WriteLine(passengerTrain.GetBagageAmount());
-            //Console.WriteLine("Выводит количество пассажиров которые попадают в диапазон:");
-            //passengerTrain.RangeOutput(13, 20); 
-            
+            Console.WriteLine("Количество пассажиров: " + passengerTrain.PassengersCount());
+            Console.WriteLine("Количество багажа у пассажиров: " + passengerTrain.BaggageCount());
+            var rangeList = passengerTrain.RangeOutput(2, 53);
+            foreach (var element in rangeList)
+            {
+                Console.WriteLine(element);
+            }
 
         }
     }

@@ -9,12 +9,12 @@ using EPAM1.Wagons.Interfaces;
 
 namespace EPAM1.Wagons
 {
-    public abstract class PassengerWagon : IPassengerWagon
+    public abstract class PassengerWagon : IWagon
     {
         public int ComfortLevel { get; set; }
-        public int WagonCapacity { get; set; }
-        public int ElementsAmount { get; set; }
-        public ICollection<Passenger> Passengers { get; }
+        public abstract int WagonCapacity { get; protected set; }
+        public int ElementsAmount { get; protected set; }
+        public ICollection<Passenger> Passengers { get; protected set; }
 
         public int ElementCount()
         {
@@ -26,30 +26,24 @@ namespace EPAM1.Wagons
             return Passengers.Sum(passenger => passenger.BaggageAmount);
         }
 
-        public void AddPassenger(int baggageAmount)
+        public void AddPassenger(int baggageAmount = 1)
         {
+            ElementsAmount++;
             if (WagonCapacity <= ElementsAmount)
             {
-                Console.WriteLine("Wagon is overload after addS");
+                throw new ArgumentOutOfRangeException();
             }
-            else
-            {
-                ElementsAmount++;
-                Passengers.Add(new Passenger(baggageAmount));
-            }
+            Passengers.Add(new Passenger(baggageAmount));
         }
 
-        protected PassengerWagon(int elementsAmount, int wagonCapacity)
+        protected PassengerWagon(int elementsAmount)
         {
-            WagonCapacity = wagonCapacity;
-            ElementsAmount = elementsAmount;
             Passengers = new List<Passenger>(elementsAmount);
 
             for (var i = 0; i < elementsAmount; i++)
             {
-                Passengers.Add(new Passenger());
+                AddPassenger();
             }
-
         }
     }
 }

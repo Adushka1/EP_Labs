@@ -11,7 +11,5 @@ namespace EPAM1.Wagons.Interfaces
         int WagonCapacity { get; }
         int ElementsAmount { get; }
 
-        int ElementCount();
-
     }
 }

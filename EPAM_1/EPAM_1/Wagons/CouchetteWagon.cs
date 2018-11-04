@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace EPAM1.Wagons
 {
-    public class CouchetteWagon : PassengerWagon
+    public sealed class CouchetteWagon : PassengerWagon
     {
-        public CouchetteWagon(int elementsAmount, int wagonCapacity = 54) : base(elementsAmount, wagonCapacity = 54)
+        public override int WagonCapacity { get; protected set; } = 56;
+
+        public CouchetteWagon(int elementsAmount) : base(elementsAmount)
         {
-            WagonCapacity = wagonCapacity;
-            ComfortLevel = 55;
+            ComfortLevel = 50;
+        }
+
+        public override string ToString()
+        {
+            return $"-----------\n|Couchette|\n{ElementsAmount}        \n-----------\n";
         }
     }
 }

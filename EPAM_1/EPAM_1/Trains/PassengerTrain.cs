@@ -5,15 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EPAM1.Locomotives.Interfaces;
-using EPAM1.Trains.Interfaces;
 using EPAM1.Wagons;
 
 namespace EPAM1.Trains
 {
-    public class PassengerTrain : ITrain<PassengerWagon>
+    public class PassengerTrain : Train<PassengerWagon>
     {
-        public ILocomotive Locomotive { get; }
-        public ICollection<PassengerWagon> Wagons { get; set; }
 
         public PassengerTrain(ILocomotive locomotive)
         {
@@ -21,29 +18,31 @@ namespace EPAM1.Trains
             Locomotive = locomotive;
         }
 
-        public int Count(Func<PassengerWagon, int> comparer)
+        public void AddPassenger(int wagonIndex)
         {
-            return Wagons.Sum(comparer);
+            Wagons[wagonIndex].AddPassenger();
         }
 
-        public void Sort(Func<PassengerWagon, int> comparerFunc)
+        public int PassengersCount()
         {
-            Wagons = Wagons.OrderBy(comparerFunc).ToList();
+            return Count(x => x.ElementCount());
         }
 
-        public ICollection<PassengerWagon> RangeOutput(int firstElement, int secondElement)
+        public int BaggageCount()
         {
-            return Wagons.Where(x => x.ElementsAmount > firstElement && x.ElementsAmount < secondElement).ToList();
+            return Count(x => x.BaggageCount());
         }
 
-        public void AddWagon(PassengerWagon wagon)
+        public override string ToString()
         {
-            Wagons.Add(wagon);
-        }
-
-        public void RemoveWagon(PassengerWagon wagon)
-        {
-            Wagons.Remove(wagon);
+            var k = "";
+            foreach (var wagon in Wagons)
+            {
+                k += wagon;
+                k += "||||\n";
+            }
+            k += Locomotive;
+            return k;
         }
     }
 }

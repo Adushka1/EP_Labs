@@ -7,21 +7,23 @@ using EPAM1.Wagons.Interfaces;
 
 namespace EPAM1.Wagons
 {
-    class CoveredWagon : IGoodsWagon
+    public class CoveredWagon : GoodsWagon
     {
-
-        public int WagonCapacity { get; }
-        public int ElementsAmount { get; }
-        public int ElementCount()
+        public CoveredWagon(string elementName, int elementsAmount, int wagonCapacity) : base(elementName, elementsAmount, wagonCapacity)
         {
-            throw new NotImplementedException();
         }
 
-        public CoveredWagon(int elementsAmount, int wagonCapacity)
+        public override void Load()
         {
-            ElementsAmount = elementsAmount;
-            WagonCapacity = wagonCapacity;
         }
 
+        public override void Unload()
+        {
+        }
+
+        public override string ToString()
+        {
+            return $"-------\n|Covered|\n{ElementsAmount}\n-------\n";
+        }
     }
 }

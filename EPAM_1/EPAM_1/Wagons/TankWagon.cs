@@ -3,25 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EPAM1.Wagons.Interfaces;
 
 namespace EPAM1.Wagons
 {
-    public class TankWagon : IGoodsWagon
+    public class TankWagon : GoodsWagon
     {
-        public TankWagon(int wagonCapacity, int elementsAmount)
+
+
+        protected TankWagon(string elementName, int elementsAmount, int wagonCapacity) : base(elementName, elementsAmount, wagonCapacity)
         {
-            WagonCapacity = wagonCapacity;
-            ElementsAmount = elementsAmount;
         }
 
-        public int WagonCapacity { get; }
-
-        public int ElementsAmount { get; }
-
-        public int ElementCount()
+        public override void Load()
         {
-            return ElementsAmount;
+        }
+
+        public override void Unload()
+        {
+        }
+
+        public override string ToString()
+        {
+            return $"-----\n|Tank|\n{ElementsAmount}\n-----\n";
         }
     }
 }

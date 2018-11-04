@@ -11,7 +11,11 @@ namespace EPAM1.Locomotives
     {
         public void Move()
         {
-            throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return $"---------\n|Electric|\nlocomotive\n----\\/---\n";
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EPAM1.Locomotives.Interfaces
 {
-   public interface ILocomotive
+    public interface ILocomotive
     {
         void Move();
     }
