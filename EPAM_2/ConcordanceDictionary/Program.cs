@@ -5,7 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using ConcordanceDictionary.TextAnalyzer;
+using ConcordanceDictionary.TextAnalyzer.Interfaces;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace ConcordanceDictionary
 {
@@ -17,18 +21,28 @@ namespace ConcordanceDictionary
             var outputPath = ConfigurationManager.AppSettings["OutputPath"];
             try
             {
-                Concordance concordance = new Concordance();
+                JsonSerializer jsonSerializer = new JsonSerializer();
+                jsonSerializer.Converters.Add(new KeyValuePairConverter());
+                IConcordance concordance = new Concordance();
                 using (StreamReader sr = new StreamReader(readPath))
                 {
-                    concordance.GetWordInfos(sr);
+                    var i = 1;
+                    while (sr.Peek() >= 0)
+                    {
+                        var line = sr.ReadLine();
+                        concordance.GetWordInfos(line, i);
+                        i++;
+                    }
                 }
 
                 using (StreamWriter swr = new StreamWriter(outputPath))
+                using (JsonWriter writer = new JsonTextWriter(swr))
                 {
-                    foreach (var word in concordance)
-                    {
-                        swr.WriteLine(word.ToString());
-                    }
+                    jsonSerializer.Serialize(writer, concordance);
+                    //foreach (var word in concordance)
+                    //{
+                    //    swr.WriteLine(word.ToString());
+                    //}
                 }
             }
             catch (Exception e)
