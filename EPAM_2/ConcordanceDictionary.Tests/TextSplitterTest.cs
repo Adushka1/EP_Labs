@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using ConcordanceDictionary.TextComponents;
 using ConcordanceDictionary.TextComponents.Interfaces;
 using Xunit;
@@ -10,40 +7,36 @@ namespace ConcordanceDictionary.Tests
 {
     public class TextSplitterTest
     {
-        private readonly ITextSplitter _textSplitter = new TextSplitter();
 
-        public TextSplitterTest()
-        {
-        }
-
-        [Fact]
-        public void SplitTextWithSeparators()
+        [Theory]
+        [InlineData("The World    ---?.,\n? Star??Platinum", new[] { "The", "World", "Star", "Platinum" })]
+        [InlineData("Pluto -- Planet", new[] { "Pluto", "Planet" })]
+        [InlineData("Slo1Mo", new[] { "Slo", "Mo" })]
+        public void SplitTextWithSeparators(string input, string[] expected)
         {
             //Arrange
-            var text = "The World    ---?.,\n? Star??Platinum";
-            var expected = new[] {"The", "World", "Star", "Platinum"};
+            ITextSplitter textSplitter = new TextSplitter();
 
             //Act
-             var actual =_textSplitter.SplitLine(text);
+            var actual = textSplitter.SplitLine(input);
 
             //Assert
-            Assert.Equal(actual,expected);
+            Assert.Equal(actual, expected);
         }
 
         [Fact]
         public void SplitEmptyString()
         {
             //Arrange
+            ITextSplitter textSplitter = new TextSplitter();
             var text = "           ";
-            var expected ="";
+            var expected = "";
 
             //Act
-            var actual = _textSplitter.SplitLine(text).First();
+            var actual = textSplitter.SplitLine(text).First();
 
             //Assert
             Assert.Equal(actual, expected);
         }
-
-        
     }
 }

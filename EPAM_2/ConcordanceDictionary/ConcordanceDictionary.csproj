@@ -72,6 +72,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextAnalyzer\WordInfo.cs" />
     <Compile Include="TextComponents\TextSplitter.cs" />
+    <Compile Include="TextWriter\SubjectHeading.cs" />
+    <Compile Include="TextWriter\Interfaces\ISubjectHeading.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

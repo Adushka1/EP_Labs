@@ -5,24 +5,38 @@ using ConcordanceDictionary.TextAnalyzer.Interfaces;
 namespace ConcordanceDictionary.TextAnalyzer
 {
     public class WordInfo : IWordInfo
-
     {
-    public string Word { get; }
-    public int WordAmount { get; set; }
-    public IList<int> LineNumbers { get; set; }
+        public string Word { get; }
+        public int WordAmount { get; private set; }
+        public IList<int> LineNumbers { get; }
 
-    public WordInfo(string word, int firstLineNumber)
-    {
-        Word = word;
-        LineNumbers = new List<int> {firstLineNumber};
-        WordAmount = 1;
-    }
+        public WordInfo(string word, int firstLineNumber)
+        {
+            Word = word;
+            LineNumbers = new List<int> { firstLineNumber };
+            WordAmount = 1;
+        }
 
-    public override string ToString()
-    {
-        var linePosition = LineNumbers.Aggregate("", (current, line) => current + line.ToString() + " ");
+        public WordInfo(string word, IList<int> lineNumbers, int wordAmount)
+        {
+            Word = word;
+            WordAmount = wordAmount;
+            LineNumbers = lineNumbers;
+        }
 
-        return $"{Word}.................... {WordAmount}: {linePosition} ";
-    }
+        public void AddInfo(string word, int linePosition)
+        {
+            WordAmount++;
+            if (!LineNumbers.Contains(linePosition))
+            {
+                LineNumbers.Add(linePosition);
+            }
+        }
+
+        public override string ToString()
+        {
+            return $"{Word} {WordAmount} {string.Join(",",LineNumbers.ToArray())}";
+        }
     }
 }
+

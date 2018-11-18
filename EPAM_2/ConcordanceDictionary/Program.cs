@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Configuration;
 using ConcordanceDictionary.TextAnalyzer;
 using ConcordanceDictionary.TextAnalyzer.Interfaces;
+using ConcordanceDictionary.TextWriter;
+using ConcordanceDictionary.TextWriter.Interfaces;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace ConcordanceDictionary
 {
@@ -19,31 +15,27 @@ namespace ConcordanceDictionary
         {
             var readPath = ConfigurationManager.AppSettings["ReadPath"];
             var outputPath = ConfigurationManager.AppSettings["OutputPath"];
+            var serializePath = ConfigurationManager.AppSettings["SerializePath"];
+            var concordance = new Concordance();
+            var subjectHeading = new SubjectHeading();
+
             try
             {
-                JsonSerializer jsonSerializer = new JsonSerializer();
-                jsonSerializer.Converters.Add(new KeyValuePairConverter());
-                IConcordance concordance = new Concordance();
-                using (StreamReader sr = new StreamReader(readPath))
-                {
-                    var i = 1;
-                    while (sr.Peek() >= 0)
-                    {
-                        var line = sr.ReadLine();
-                        concordance.GetWordInfos(line, i);
-                        i++;
-                    }
-                }
+                using (var reader = new StreamReader(readPath))
+                    concordance.ConcordsFill(reader);
+                concordance.SortByKey();
 
-                using (StreamWriter swr = new StreamWriter(outputPath))
-                using (JsonWriter writer = new JsonTextWriter(swr))
-                {
-                    jsonSerializer.Serialize(writer, concordance);
-                    //foreach (var word in concordance)
-                    //{
-                    //    swr.WriteLine(word.ToString());
-                    //}
-                }
+                using (var swr = new StreamWriter(outputPath))
+                    foreach (var line in subjectHeading.GetConcordanceLines(concordance))
+                        swr.WriteLineAsync(line);
+
+                using (var serializer = new StreamWriter(serializePath))
+                    serializer.Write(JsonConvert.SerializeObject(concordance, Formatting.Indented));
+
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("Something went wrong with file");
             }
             catch (Exception e)
             {

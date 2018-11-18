@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using ConcordanceDictionary.TextComponents.Interfaces;
 
 namespace ConcordanceDictionary.TextComponents
@@ -16,6 +10,11 @@ namespace ConcordanceDictionary.TextComponents
         public TextSplitter()
         {
             Pattern = @"[^a-zA-Z]+";
+        }
+
+        public TextSplitter(string pattern)
+        {
+            Pattern = pattern;
         }
 
         public string[] SplitLine(string line)

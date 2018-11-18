@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
+using System.Linq;
 using ConcordanceDictionary.TextAnalyzer.Interfaces;
 using ConcordanceDictionary.TextComponents;
 using ConcordanceDictionary.TextComponents.Interfaces;
@@ -11,39 +11,46 @@ namespace ConcordanceDictionary.TextAnalyzer
     public class Concordance : IConcordance
     {
         private readonly ITextSplitter _textSplitter;
-        public Dictionary<string, IWordInfo> WordInfos { get; }
-
-
+        public Dictionary<string, WordInfo> Concords { get; private set; }
 
         public Concordance()
         {
             _textSplitter = new TextSplitter();
-            WordInfos = new Dictionary<string, IWordInfo>();
+            Concords = new Dictionary<string, WordInfo>();
         }
 
-        public void GetWordInfos(string line, int linePosition)
+        public void ConcordsFill(StreamReader reader)
         {
-            foreach (var word in _textSplitter.SplitLine(line))
+            var linePosition = 1;
+
+            while (reader.Peek() >= 0)
             {
-                var lowerWord = word.ToLower();
-                if (!WordInfos.ContainsKey(lowerWord))
+                var line = reader.ReadLine();
+
+                foreach (var word in _textSplitter.SplitLine(line))
                 {
-                    WordInfos.Add(lowerWord, new WordInfo(lowerWord, linePosition));
-                }
-                else
-                {
-                    WordInfos[lowerWord].WordAmount++;
-                    if (!WordInfos[lowerWord].LineNumbers.Contains(linePosition))
+                    var lowerWord = word.ToLower();
+                    if (!Concords.ContainsKey(lowerWord))
                     {
-                        WordInfos[lowerWord].LineNumbers.Add(linePosition);
+                        Concords.Add(lowerWord, new WordInfo(lowerWord, linePosition));
+                    }
+                    else
+                    {
+                        Concords[lowerWord].AddInfo(lowerWord, linePosition);
                     }
                 }
+                linePosition++;
             }
+        }
+
+        public void SortByKey()
+        {
+            Concords = Concords.OrderBy(x => x.Key).ToDictionary((keyItem) => keyItem.Key, (valueItem) => valueItem.Value);
         }
 
         public IEnumerator GetEnumerator()
         {
-            return WordInfos.GetEnumerator();
+            return Concords.GetEnumerator();
         }
     }
 }

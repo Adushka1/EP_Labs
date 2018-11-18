@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ConcordanceDictionary.TextComponents.Interfaces;
+using System.IO;
 
 namespace ConcordanceDictionary.TextAnalyzer.Interfaces
 {
     public interface IConcordance : IEnumerable
     {
-        Dictionary<string, IWordInfo> WordInfos { get; }
-        void GetWordInfos(string line, int linePosition);
+        Dictionary<string, WordInfo> Concords { get; }
+        void ConcordsFill(StreamReader reader);
+        void SortByKey();
     }
 }

@@ -1,1 +1,25 @@
-[{"Key":"the","Value":{"Word":"the","WordAmount":3,"LineNumbers":[1,3]}},{"Key":"world","Value":{"Word":"world","WordAmount":1,"LineNumbers":[1]}},{"Key":"star","Value":{"Word":"star","WordAmount":1,"LineNumbers":[1]}},{"Key":"platinum","Value":{"Word":"platinum","WordAmount":2,"LineNumbers":[1,2]}},{"Key":"tzar","Value":{"Word":"tzar","WordAmount":1,"LineNumbers":[2]}},{"Key":"s","Value":{"Word":"s","WordAmount":1,"LineNumbers":[2]}},{"Key":"para","Value":{"Word":"para","WordAmount":1,"LineNumbers":[2]}},{"Key":"bellumas","Value":{"Word":"bellumas","WordAmount":1,"LineNumbers":[2]}},{"Key":"ld","Value":{"Word":"ld","WordAmount":1,"LineNumbers":[2]}},{"Key":"tower","Value":{"Word":"tower","WordAmount":1,"LineNumbers":[3]}},{"Key":"another","Value":{"Word":"another","WordAmount":1,"LineNumbers":[3]}},{"Key":"one","Value":{"Word":"one","WordAmount":1,"LineNumbers":[3]}},{"Key":"bites","Value":{"Word":"bites","WordAmount":1,"LineNumbers":[3]}},{"Key":"dust","Value":{"Word":"dust","WordAmount":1,"LineNumbers":[3]}}]
+A
+another         1   : 3 
+B
+bellumas        1   : 2 
+bites           1   : 3 
+D
+dust            1   : 3 
+L
+ld              1   : 2 
+M
+more            1   : 2 
+O
+one             2   : 2 3 
+P
+para            1   : 2 
+platinum        2   : 1 2 
+S
+s               1   : 2 
+star            1   : 1 
+T
+the             3   : 1 3 
+tower           1   : 3 
+tzar            1   : 2 
+W
+world           1   : 1 
