@@ -30,5 +30,10 @@ namespace EPAM_3.BillingSystem
             Date = date;
             Duration = duration;
         }
+
+        public override string ToString()
+        {
+            return $"{Caller.Name} called from {Caller.Phone.Id} to {Receiver.Name}";
+        }
     }
 }

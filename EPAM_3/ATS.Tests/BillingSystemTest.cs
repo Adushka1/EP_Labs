@@ -55,11 +55,11 @@ namespace ATS.Tests
         public void BasicTest()
         {
             var callEventArgs = new RingEventArgs(firstClient.Phone, secondClient.Phone);
-            billingExchange.AbonentConnectedEventHandler(null, callEventArgs);
+            billingExchange.AbonentsConnectedEventHandler(null, callEventArgs);
 
             Task.Delay(20000).Wait();
 
-            billingExchange.AbonentDisconnectedEventHandler(null, callEventArgs);
+            billingExchange.AbonentsDisconnectedEventHandler(null, callEventArgs);
             Task.Delay(21000).Wait();
 
             Assert.True(_unit.CallInfos.Count > 0);

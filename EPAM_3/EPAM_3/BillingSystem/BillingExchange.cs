@@ -28,20 +28,13 @@ namespace EPAM_3.BillingSystem
             _currentCalls = new Dictionary<(IPhone, IPhone), CallInfo>();
         }
 
-        public bool AbonentIsAvalible(Phone abonent)
+        public bool AbonentIsAvalible(IPhone abonent)
         {
             var client = _unit.Clients.GetEntityOrDefault(x => x.Phone == abonent);
-            if (client != null && client.Status == ClientStatus.Avalible)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return client != null && client.Status == ClientStatus.Avalible;
         }
 
-        public void AbonentConnectedEventHandler(object sender, RingEventArgs e)
+        public void AbonentsConnectedEventHandler(object sender, RingEventArgs e)
         {
             var senderClient = _unit.Clients.GetEntityOrDefault(x => x.Phone == e.Sender);
             var receiverClient = _unit.Clients.GetEntityOrDefault(x => x.Phone == e.Receiver);
@@ -50,7 +43,7 @@ namespace EPAM_3.BillingSystem
             _currentCalls.Add((e.Sender, e.Receiver), call);
         }
 
-        public void AbonentDisconnectedEventHandler(object sender, RingEventArgs e)
+        public void AbonentsDisconnectedEventHandler(object sender, RingEventArgs e)
         {
             if (!_currentCalls.ContainsKey((e.Sender, e.Receiver))) return;
 

@@ -18,5 +18,15 @@ namespace EPAM_3.Phones
         {
             return Id.CompareTo(other.Id);
         }
+
+        public override bool Equals(object obj)
+        {
+            return Id.Equals((obj as IPhone)?.Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }

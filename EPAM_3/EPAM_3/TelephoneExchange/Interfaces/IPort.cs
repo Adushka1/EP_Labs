@@ -6,11 +6,11 @@ using EPAM_3.TelephoneExchange.Enums;
 
 namespace EPAM_3.TelephoneExchange.Interfaces
 {
-    public interface IPort
+    public interface IPort : IComparable<IPort>
     {
         event EventHandler<PortStatus> PortStatusChanged;
         int Number { get; }
-        PortStatus Status { get;}
+        PortStatus Status { get; set; }
 
         void OnPortStatusChanged(PortStatus status);
 
