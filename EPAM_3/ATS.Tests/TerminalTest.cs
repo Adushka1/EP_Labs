@@ -65,8 +65,8 @@ namespace ATS.Tests
                 exchangeBilling: billingExchange);
 
             _callReceivingDelay = TimeSpan.FromMilliseconds(10000);
-            _senderTerminal = new Terminal(_phones[0], exchange, _callReceivingDelay,_infoBuilder);
-            _receiverTerminal = new Terminal(_phones[1], exchange, _callReceivingDelay,_infoBuilder);
+            _senderTerminal = new Terminal(_phones[0], exchange, _callReceivingDelay, _infoBuilder);
+            _receiverTerminal = new Terminal(_phones[1], exchange, _callReceivingDelay, _infoBuilder);
         }
 
         [Fact]
@@ -131,9 +131,9 @@ namespace ATS.Tests
 
             _receiverTerminal.CloseCall();
 
-            var info = _senderTerminal.GetCallsHistory().ToList();
+            var info = _senderTerminal.GetCallsHistory(x => x.Caller.Phone == _phones[0]).ToList();
 
-            Assert.Equal("First called from 111 to Second", info.FirstOrDefault().ToString());
+            Assert.Equal("First called from 111 to Second", info.FirstOrDefault()?.ToString());
         }
     }
 }

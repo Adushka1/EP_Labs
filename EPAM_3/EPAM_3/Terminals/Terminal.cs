@@ -76,13 +76,13 @@ namespace EPAM_3.Terminals
 
         private async void ExchangeCallStartEventHandler(object sender, RingEventArgs e)
         {
-            if (PhoneNumber == e.Sender)
+            if (Equals(PhoneNumber, e.Sender))
             {
                 this._isReceiver = false;
                 _currentCollocutor = e.Receiver;
             }
 
-            if (PhoneNumber == e.Receiver)
+            if (Equals(PhoneNumber, e.Receiver))
             {
                 this._isReceiver = true;
                 _currentCollocutor = e.Sender;
@@ -100,7 +100,7 @@ namespace EPAM_3.Terminals
 
         private void ExchangeCallEndEventHandler(object sender, RingEventArgs e)
         {
-            if (PhoneNumber == e.Sender || PhoneNumber == e.Receiver)
+            if (e != null && (Equals(PhoneNumber, e.Sender) || Equals(PhoneNumber, e.Receiver)))
             {
                 _currentCollocutor = null;
                 this._isReceiver = false;
@@ -120,9 +120,9 @@ namespace EPAM_3.Terminals
             return _telephoneExchange.MapToPort(PhoneNumber, newPort);
         }
 
-        public IEnumerable<CallInfo> GetCallsHistory()
+        public IEnumerable<CallInfo> GetCallsHistory(Func<CallInfo, bool> predicate)
         {
-            var callHistory = _infoBuilder.GetCallHistory(PhoneNumber);
+            var callHistory = _infoBuilder.GetCallsInformation(PhoneNumber,predicate);
 
             return callHistory;
 

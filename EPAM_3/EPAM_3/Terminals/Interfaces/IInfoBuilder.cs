@@ -8,6 +8,6 @@ namespace EPAM_3.Terminals.Interfaces
 {
     public interface IInfoBuilder
     {
-        IEnumerable<CallInfo> GetCallHistory(IPhone phoneNumber);
+        IEnumerable<CallInfo> GetCallsInformation(IPhone phoneNumber, Func<CallInfo, bool> predicate);
     }
 }

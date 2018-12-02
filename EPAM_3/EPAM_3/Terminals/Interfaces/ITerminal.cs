@@ -17,7 +17,7 @@ namespace EPAM_3.Terminals.Interfaces
         CallStatus ReceiveCall();
         CallStatus CloseCall();
 
-        IEnumerable<CallInfo> GetCallsHistory();
+        IEnumerable<CallInfo> GetCallsHistory(Func<CallInfo,bool>predicate);
         bool ConnectToExchange();
         bool DisconnectFromExchange();
 

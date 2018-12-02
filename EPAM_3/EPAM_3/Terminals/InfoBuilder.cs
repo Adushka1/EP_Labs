@@ -17,12 +17,16 @@ namespace EPAM_3.Terminals
             _unit = unit;
         }
 
-        public IEnumerable<CallInfo> GetCallHistory(IPhone phoneNumber)
+        private IEnumerable<CallInfo> GetCallHistory(IPhone phoneNumber)
         {
-            var t = _unit.CallInfos.GetAllEntities().ToList();
-            var receivedCallHistory = _unit.CallInfos.GetEntities(x => x.Receiver.Phone.Id == phoneNumber.Id);
-            var senderCallHistory = _unit.CallInfos.GetEntities(x => x.Caller.Phone.Id == phoneNumber.Id);
-            return senderCallHistory.Union(receivedCallHistory);
+            return _unit.CallInfos.GetEntities(x => x.Receiver.Phone == phoneNumber || x.Caller.Phone == phoneNumber);
+        }
+
+        public IEnumerable<CallInfo> GetCallsInformation(IPhone phoneNumber, Func<CallInfo, bool> predicate)
+        {
+            var calls = GetCallHistory(phoneNumber);
+
+            return calls.Where(predicate);
         }
     }
 }

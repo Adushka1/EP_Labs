@@ -14,10 +14,10 @@ namespace EPAM_3.BillingSystem
 {
     public class BillingUnitOfWork
     {
-        public PhoneRepository Phones;
-        public ClientRepository Clients;
-        public TariffRepository Tariffs;
-        public CallInfoRepository CallInfos;
+        public PhoneRepository Phones { get; set; }
+        public ClientRepository Clients { get; set; }
+        public TariffRepository Tariffs { get; set; }
+        public CallInfoRepository CallInfos { get; set; }
 
         public BillingUnitOfWork(PhoneRepository phones, ClientRepository clients, TariffRepository tariffs, CallInfoRepository callInfos)
         {

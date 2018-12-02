@@ -14,8 +14,8 @@ namespace EPAM_3.Clients
         public string Name { get; }
         public ITariff Tariff { get; }
         public IPhone Phone { get; }
-        public ClientStatus Status { get; set; }
-        public decimal Balance { get; set; }
+        public ClientStatus Status { get; private set; }
+        public decimal Balance { get; private set; }
 
         public Client(int id, ITariff tariff, IPhone phone, ClientStatus status, decimal balance, string name)
         {
