@@ -13,21 +13,22 @@ namespace Accountant.DAL
     {
         static void Main(string[] args)
         {
-            IUnitOfWork unit = new UnitOfWork();
-            var client = new Client
+            IUnitOfWork unit = new UnitOfWork("DbConnection");
+            var mango = new Manager
             {
-                Id = 1,
-                Name = "vova"
+                Name = "Andrey"
             };
             var report = new Report
             {
-                Client = client,
+                Cost = 112,
                 Date = DateTime.Now,
-                Id = 2,
-                Cost = 112
+                Manager = mango,
+                ManagerId = mango.Id,
+                Customer = "Ilya"
             };
-
             unit.ReportRepository.Insert(report);
+            var t = unit.ReportRepository.Get(r => r.Cost == 112).FirstOrDefault()?.Customer;
+            unit.Save();
             Console.ReadKey();
         }
     }

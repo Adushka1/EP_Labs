@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
@@ -15,7 +16,8 @@ namespace Accountant.Service
 {
     public partial class Service1 : ServiceBase
     {
-        Logger logger;
+        FolderWatcher _folderWatcher;
+
         public Service1()
         {
             InitializeComponent();
@@ -26,14 +28,22 @@ namespace Accountant.Service
 
         protected override void OnStart(string[] args)
         {
-            logger = new Logger();
-            Thread loggerThread = new Thread(logger.Start);
+            _folderWatcher = new FolderWatcher(ConfigurationManager.AppSettings["Path"]);
+            var loggerThread = new Thread(_folderWatcher.Start);
             loggerThread.Start();
+        }
+
+        public void RunAsConsole(string[] args)
+        {
+            OnStart(args);
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadLine();
+            OnStop();
         }
 
         protected override void OnStop()
         {
-            logger.Stop();
+            _folderWatcher.Stop();
             Thread.Sleep(1000);
         }
     }

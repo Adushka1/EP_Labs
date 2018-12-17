@@ -3,64 +3,72 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Accountant.DAL.Interfaces;
 using Accountant.DAL.Repositories;
+using Acountant.BLL.Interfaces;
 
 namespace Acountant.BLL.Models
 {
-    public class Logger
+    public class FolderWatcher : IFolderWatcher
     {
-        FileSystemWatcher watcher;
+        private readonly FileSystemWatcher _watcher;
+        private object obj = new object();
+        private bool _enabled = true;
         private IUnitOfWork _unit;
-        object obj = new object();
-        bool enabled = true;
-
-        public Logger()
+        private IWriter _writer;
+        public FolderWatcher(string monitoredFolder)
         {
-            watcher = new FileSystemWatcher("C:\\Users\\Adushka\\EP_Labs\\EPAM_4\\Folder");
-            watcher.Deleted += OnDeleted;
-            watcher.Created += OnCreated;
-            watcher.Changed += OnChanged;
-            watcher.Renamed += OnRenamed;
-            _unit = new UnitOfWork();
+            _watcher = new FileSystemWatcher(monitoredFolder) { Filter = "*_*.csv" };
+            _watcher.Deleted += OnDeleted;
+            _watcher.Created += OnCreated;
+            _watcher.Changed += OnChanged;
+            _watcher.Renamed += OnRenamed;
+            _writer = new Writer();
         }
 
         public void Start()
         {
-            watcher.EnableRaisingEvents = true;
-            while (enabled)
+            _watcher.EnableRaisingEvents = true;
+            while (_enabled)
             {
                 Thread.Sleep(1000);
             }
         }
+
         public void Stop()
         {
-            watcher.EnableRaisingEvents = false;
-            enabled = false;
+            _watcher.EnableRaisingEvents = false;
+            _enabled = false;
         }
 
         private void OnRenamed(object sender, RenamedEventArgs e)
         {
             string fileEvent = "Renamed in " + e.FullPath;
             string filePath = e.OldFullPath;
+
+            if (e.Name.IndexOf(".tmp", StringComparison.Ordinal) == -1) return;
+            Thread.Sleep(1000);
+            Task.Factory.StartNew(() => _writer.WriteToDatabase(e));
+
             RecordEntry(fileEvent, filePath);
+
         }
 
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
+
             string fileEvent = "Changed";
             string filePath = e.FullPath;
             RecordEntry(fileEvent, filePath);
-            foreach (var element in Separator.DivideFile(filePath))
-            {
-                _unit.ReportRepository.Insert(element);
-            }
         }
 
         private void OnCreated(object sender, FileSystemEventArgs e)
         {
             string fileEvent = "Created";
             string filePath = e.FullPath;
+
+            _writer.WriteHeader(e);
             RecordEntry(fileEvent, filePath);
         }
 
@@ -70,13 +78,14 @@ namespace Acountant.BLL.Models
             string filePath = e.FullPath;
             RecordEntry(fileEvent, filePath);
         }
+
         private void RecordEntry(string fileEvent, string filePath)
         {
             lock (obj)
             {
                 using (StreamWriter writer = new StreamWriter("D:\\templog.txt", true))
                 {
-                    writer.WriteLine($"{DateTime.Now:dd/MM/yyyy hh:mm:ss} файл {filePath} был {fileEvent}");
+                    writer.WriteLine($"{DateTime.Now:dd/MM/yyyy hh:mm:ss} file {filePath} was {fileEvent}");
                     writer.Flush();
                 }
             }

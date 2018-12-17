@@ -48,6 +48,11 @@ namespace Accountant.DAL.Repositories
             DbSet.Add(entity);
         }
 
+        public virtual void Insert(IEnumerable<TEntity> entities)
+        {
+            DbSet.AddRange(entities);
+        }
+
         public virtual void Delete(object id)
         {
             TEntity entityToDelete = DbSet.Find(id);

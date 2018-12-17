@@ -11,8 +11,7 @@ namespace Accountant.DAL.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         GenericRepository<Report> ReportRepository { get; }
-        GenericRepository<Client> ClientRepository { get; }
-        GenericRepository<Product> ProductRepository { get; }
+        GenericRepository<Manager> ManagerRepository { get; }
 
         void Save();
     }

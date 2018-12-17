@@ -12,10 +12,14 @@ namespace Accountant.DAL.Repositories
     public class UnitOfWork : IUnitOfWork
     {
 
-        private ReportContext _context = new ReportContext();
+        private ReportContext _context;
         private GenericRepository<Report> reportRepository;
-        private GenericRepository<Client> clientRepository;
-        private GenericRepository<Product> productRepository;
+        private GenericRepository<Manager> managerRepository;
+
+        public UnitOfWork(string connectionString)
+        {
+            _context = new ReportContext(connectionString);
+        }
 
         public GenericRepository<Report> ReportRepository
         {
@@ -29,33 +33,20 @@ namespace Accountant.DAL.Repositories
             }
         }
 
-        public GenericRepository<Client> ClientRepository
+        public GenericRepository<Manager> ManagerRepository
         {
             get
             {
 
-                if (this.clientRepository == null)
+                if (this.managerRepository == null)
                 {
-                    this.clientRepository = new GenericRepository<Client>(_context);
+                    this.managerRepository = new GenericRepository<Manager>(_context);
                 }
-                return clientRepository;
+                return managerRepository;
             }
         }
 
-        public GenericRepository<Product> ProductRepository
-        {
-            get
-            {
-
-                if (this.productRepository == null)
-                {
-                    this.productRepository = new GenericRepository<Product>(_context);
-                }
-                return productRepository;
-            }
-        }
-
-        public void Save()
+        public  void Save()
         {
             _context.SaveChanges();
         }

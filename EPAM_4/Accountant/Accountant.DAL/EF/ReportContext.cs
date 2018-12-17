@@ -11,15 +11,14 @@ namespace Accountant.DAL.EF
     public class ReportContext : DbContext
     {
         public DbSet<Report> Reports { get; set; }
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Manager> Clients { get; set; }
 
         public ReportContext()
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<ReportContext>());
         }
 
-        public ReportContext(string connectionString) : base("DefaultConnection")
+        public ReportContext(string connectionString) : base("DBConnection")
         {
         }
 
