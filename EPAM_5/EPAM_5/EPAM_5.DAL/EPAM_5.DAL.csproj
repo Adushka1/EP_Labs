@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EPAM.Models\EPAM_5.Models.csproj" />
+    <ProjectReference Include="..\EPAM_5.Common\EPAM_5.Common.csproj" />
+    <ProjectReference Include="..\EPAM_5\EPAM_5.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

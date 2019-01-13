@@ -1,0 +1,317 @@
+﻿/*Ajax loader*/
+.loader-div {
+   position: fixed;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: 1100;
+   background-color: white;
+   opacity: .6;
+}
+.ajax-loader {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   margin-left: -32px; /* -1 * image width / 2 */
+   margin-top: -32px; /* -1 * image height / 2 */
+   display: block;
+}
+
+/*Sticky footer*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 50px;
+  /*margin-right: 10px;*/
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 50px;
+  background-color: #f5f5f5;
+  border-color: #e7e7e7;
+  color: #777;
+}
+/*End sticky footer*/
+
+.container {
+  width: auto;
+  max-width: 100%;
+  padding: 0 15px;
+}
+.container .text-muted {
+  margin: 15px 0;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 5px;
+    padding-right: 8px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 380px;
+}
+/*Overwrite boostrap*/
+h1, .h1, h2, .h2, h3, .h3 {
+    /*margin-top: 20px;
+    margin-bottom: 10px;*/
+    margin-top: 10px;
+}
+.table {
+    /*width: 100%;
+    margin-bottom: 20px;*/
+    margin-bottom: 6px;
+}
+
+.btn {
+    border: #c5c5c5 1px solid;
+    padding-top: 4px;
+    padding-bottom: 4px;    
+}
+.btn:focus { 
+    outline: none;    
+    border: #8A8A8A 1px solid;
+}
+.btn.btn-primary {
+    /*background: #3288e6;*/
+    background: #6ea0d7;
+    color: #fff;
+}
+.btn.btn-secondary {
+    background: #e0e0e0;
+    color: #777;
+}  
+.btn.btn-success {
+    background: #70a2cb;
+    color: #fff;
+}
+
+/*.btn-primary:focus {
+    box-shadow: 0px 0px 3pt 2pt red;
+}*/
+
+
+.field-text-box {
+    /*display: inline-block;*/
+    display: block;
+    width: 250px;
+    margin-bottom: 10px;
+}
+
+.pageBodyCell {
+	width: 100%;
+}
+#codesGridBody {
+    width: 900px;
+	
+}
+.tbl_grid {
+	width: 100%;
+	vertical-align: middle;
+}
+.grid-alt-row {
+	background-color: #BFC0C3;
+	background-image: none;
+}
+
+.cursor-pointer-tr tr
+{
+	cursor: pointer;
+}
+.cursor-pointer
+{
+	cursor: pointer;
+}
+.message {
+	color: Green;
+	padding-left: 6px;
+	padding-bottom: 6px;
+	text-align: left;
+}
+.error-message {
+	color: red;
+	padding-left: 6px;
+	padding-bottom: 6px;
+	text-align: left;
+}
+.form-error-message {
+    /*position:absolute;*/
+    padding: 5px;
+    background-color: #E03930;
+    color:black;
+}
+fieldset {
+    border: 2px solid #cacaca;
+    margin-bottom: 10px;
+    padding:0px 8px 8px 8px;
+}
+legend {
+    margin-top: -10px;
+    margin-bottom: 4px;
+    border-bottom: 0;
+    width: auto;
+    font-weight:bold;
+}
+.legend-line {
+    font-size: smaller;
+    color: #999999;
+    margin-left: 20px;
+}
+.form-control {
+    height:28px;
+    width:250px;
+    padding: 0px 6px;    
+}
+.form-group.low-bottom {
+    /*bootstrap.js sets 15px. low for last item.*/
+    margin-bottom: 7px;
+}
+.height-to-form-comtrol {
+    height:28px;
+}
+.label-adjust {
+    padding-top:4px;
+    font-weight:normal;
+    width:130px;
+}
+.replace-label-dent {
+    margin-left: 130px !important;
+}
+.remove-left-dent {
+    margin-left: 0 !important;
+}
+.left-dent {
+    margin-left: 6px;
+}
+.bottom-line {
+    margin-bottom: 6px;
+}
+.bottom-border {
+    border-bottom: 1px solid #c5c5c5;
+}
+
+.price-search {
+    width:120px;
+    text-align:right;
+}
+
+.placeholder-color {
+    color: #999999;
+    /*color: #007AC4;*/
+}
+.control-color {
+    color: #666;
+}
+
+.col-lbl-1 {
+    width: 125px;
+    float: left;
+}
+.col-inp-1 {
+    width: 280px;
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;    
+    float: left;
+}
+
+.nav-active {    
+    outline: thin dotted #333;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+    color: #ffffff !important;
+    font-weight: bold;
+}
+.email_form_txt
+{
+    width:250px;
+    font-size:12px;
+}
+.email_form_panel
+{
+	border-width: 2px;
+	border-style: solid;
+	border-color: #C0C0C0;
+	width: 100%;
+	background-color: #F2F2F2;
+	font-family: Arial;
+	vertical-align: text-top;
+	text-align: left;
+	font-size: 0.9em;
+}
+#ng-view {
+    position: relative;
+    padding-top: 30px;
+}
+
+
+.navbar-default {
+    /*background-color: #f8f8f8;*/
+    background-color: #f5f5f5;
+    border-color: #e7e7e7;
+}
+
+.app-modal-window .modal-dialog {
+  width: 400px;
+}
+/*Overwrite trNgGrid pagination */
+.tr-ng-grid .tr-ng-grid-footer .pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 5px 0;
+  border-radius: 4px;
+}
+.page-size {
+    margin-top: 6px;
+}
+.pager-label {
+    color: #999999 !important;
+    white-space: nowrap;
+}
+
+/*Overwrite ng-table pager*/
+.ng-table-pager .pagination {
+    margin: 0;
+}
+.ng-table th.sortable.sort-desc, .ng-table th.sortable.sort-asc {
+    background-color: #ebebeb;
+}
+.ng-table-pager .page-label-down {
+    padding-top: 5px;
+}
+.ng-table th.text-right {
+    text-align: right;
+}
+.ng-table th.text-left {
+    text-align: left;
+}
+.ng-with-newlines {
+  white-space: pre-line;
+}
+.form-ddl-adj {
+    display: inline-block;
+    width: auto;
+}
+.help-block {
+    margin-left: 15px;
+    margin-bottom: 0px;
+}
+.field-required {
+    color: #d21c1c;
+    font-weight: bold;    
+}
+.has-warning-me {
+  border-color: #8a6d3b;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}

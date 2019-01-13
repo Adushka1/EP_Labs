@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html ng-app="smApp">
+<head>
+    <title>SM Store</title>    
+    <link rel="stylesheet" href="/Content/bootstrap-3.1.1/css/bootstrap.css" />
+    <link rel="stylesheet" href="/Content/ng-table.css" />
+    <link rel="stylesheet" href="/Content/ngExDialog.css">
+    <link rel="stylesheet" href="/Content/Site.css" />
+    
+    <script src="/Scripts/Libs/angular.js"></script>
+    <script src="/Scripts/Libs/angular-route.js"></script>
+    <script src="/Scripts/Libs/angular-resource.js"></script>
+
+</head>
+<body ng-controller="bodyController">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Product Page Example</a>
+            </div>            
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#list"><i class="glyphicon glyphicon-home"></i>  Product List </a></li>
+                <li><a href="#about"><i class="glyphicon glyphicon-user"></i>  About</a></li>
+            </ul>
+        </div>
+    </nav>   
+    <div id="main" class="body-content">        
+        <!-- Content will be injected here -->
+        <div ng-view></div>            
+    </div>   
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">@SPA AngularJS - Bootstrap</p>
+        </div>
+    </footer>   
+    <div class="loader-div" loader>
+        <img src="Content/Images/loader-indicator.gif" class="ajax-loader" />
+    </div>
+    <script src="/Scripts/Libs/ui-bootstrap-tpls-0.12.0.js"></script>
+    <script src="/Scripts/app.js"></script>
+    <script src="/Scripts/ajaxLoader.js"></script>
+    <script src="/Scripts/directives.js"></script>
+    <script src="/Scripts/controllers.js"></script>
+    <script src="/Scripts/dataServices.js"></script>    
+    <script src="/Scripts/Libs/ng-table.js"></script>
+    <script src="/Scripts/Libs/ngExDialog.js"></script>         
+</body>
+</html>

@@ -1,0 +1,79 @@
+﻿<div class="dialog-header">
+    <div class="dialog-title">{{ productDialogTitle }}</div>
+</div>
+<form class="form-horizontal" name="productForm" id="frmProduct" novalidate ng-validator>
+    <div class="dialog-message dialog-body">
+        <div class="form-group" ng-class="{'has-warning' : productForm.txtProductName.$dirty}">
+            <label for="txtProductName" class="col-sm-2 label-adjust">Product Name <span class="field-required">*</span></label>
+            <input type="text" class="form-control" id="txtProductName" name="txtProductName"
+                   data-ng-model="model.Product.ProductName"
+                   validate-on="blur"
+                   clear-on="focus"
+                   required required-message="'Product Name is required'"
+                   ng-maxlength="50" max-length-message="'No longer than 50 characters'"
+                   message-display-class="replace-label-dent"
+                   ng-focus="setDrag(true);setVisited('txtProductName')" ng-blur="setDrag(false)"
+                   auto-focus>
+        </div>
+        <div class="form-group" >
+            <label for="txtCategory" class="col-sm-2 label-adjust">Category <span class="field-required">*</span></label>
+            <select id="ddlCategory" class="form-control"
+                    ng-class="{'has-warning-me': ddlCategoryDirty}"
+                    ng-change="categoryChanged(model.selCategory.selected)"
+                    ng-model="model.selCategory.selected"
+                    ng-options="item.CategoryID as item.CategoryName for item in model.CategoryList"
+                    ng-focus="setDrag(true)" ng-blur="setDrag(false)"></select>
+        </div>        
+        <div class="form-group" ng-class="{'has-warning' : productForm.txtUnitPrice.$dirty}">
+            <label for="txtUnitPrice" class="col-sm-2 label-adjust">Unit Price ($) <span class="field-required">*</span></label>
+            <input type="text" class="form-control" id="txtUnitPrice" name="txtUnitPrice"
+                   data-ng-model="model.Product.UnitPrice"
+                   validate-on="blur"
+                   clear-on="focus"
+                   required required-message="'Price is required'"
+                   number invalid-number-message="'Invalid number'"
+                   max-number="10000" max-number-message="'Price cannot exceed $10,000'"
+                   message-display-class="replace-label-dent"
+                   ng-focus="setDrag(true);setVisited('txtUnitPrice')" ng-blur="setDrag(false)" >            
+        </div>
+        <div class="form-group">
+            <label for="txtStatus" class="col-sm-2 label-adjust">Status</label>
+            <select id="ddlStatus" class="form-control"
+                    ng-class="{'has-warning-me': ddlStatusDirty}"
+                    ng-change="statusChanged(model.selStatusType.selected)"
+                    ng-model="model.selStatusType.selected"
+                    ng-options="item.StatusCode as item.Description for item in model.ProductStatusTypes"
+                    ng-focus="setDrag(true)" ng-blur="setDrag(false)"></select>
+        </div>
+        <div class="form-group low-bottom">
+            <label for="txtAvailableSince" class="col-sm-2 label-adjust">Available Since</label>
+            <div class="input-group" ng-class="{'has-warning' : productForm.txtAvailableSince.$dirty}">
+                <input type="text" class="form-control" id="txtAvailableSince" name="txtAvailableSince"
+                       ng-model="model.Product.AvailableSince" style="width: 210px;"
+                       datepicker-popup="{{format}}" is-open="opened" min-date="'2012-01-01'" max-date="'2015-12-31'"
+                       datepicker-options="dateOptions" show-button-bar="false" 
+                       validate-on="blur"
+                       clear-on="focus"
+                       date invalid-date-message="'Invalid date'"
+                       min-date-message="'Date below minimum value'"
+                       message-after="calendarButton"
+                       message-display-class="remove-left-dent"
+                       ng-focus="setDrag(true);setVisited('txtAvailableSince')" ng-blur="setDrag(false)">
+                <span id="calendarButton" style="float:right;">
+                    <button type="button" class="btn btn-default height-to-form-comtrol" ng-click="openDatePicker($event)">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </div>
+        </div>        
+    </div>
+    <div class="dialog-buttons dialog-footer">
+        <span class="legend-line">(<span class='field-required'>*</span>: required field)</span>
+        <button type="button" class="dialog-button dialog-button-secondary" ng-mousedown="cancelAddOrUpdate()">Cancel</button>
+        <button type="button" class="dialog-button" ng-class="{'dialog-button-primary': productForm.$valid, 'dialog-button-primary-disabled': !(productForm.$valid && productForm.$dirty)} " ng-disabled="!(productForm.$valid && productForm.$dirty)" data-ng-click="saveProduct(productForm.$valid)">&#160;Save&#160;</button>
+    </div>
+</form>
+
+
+
+

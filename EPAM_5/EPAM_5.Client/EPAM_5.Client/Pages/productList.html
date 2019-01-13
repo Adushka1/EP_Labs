@@ -1,0 +1,125 @@
+﻿<div id="divDataBody" class="container">    
+    <!--<h3><ng-pluralize count="model.productList.length" when="productTitle"></ng-pluralize></h3>-->
+    <div id="message" class="error-message ng-with-newlines">{{errorMessage}}</div>
+    <fieldset>
+        <legend>&#160;Search Products&#160;</legend>
+        <div class="form-inline">
+            <div class="form-group">
+                <span>Search by</span>
+            </div>
+            <div class="form-group">
+                <select id="ddlSearchType" class="form-control"
+                        ng-class="{'placeholder-color':model.pSearchType.selected=='0', 'control-color': model.pSearchType.selected !='0' }"
+                        ng-model="model.pSearchType.selected"
+                        ng-options="item.id as item.name for item in model.productSearchTypes"
+                        options-class="{'placeholder-color':'placeholder', 'control-color':'data'} "                        
+                        ng-focus="errorMessage=''"></select>                
+            </div>
+            <div class="form-group left-dent">
+                <input id="txtSearchText" type="text" ng-model="search.pSearchText" class="form-control" 
+                       style="width:250px;" placeholder="Seach Text" maxlength="25" ng-focus="errorMessage=''">
+            </div>
+            <!--Currently selected: {{ {selected_color: model.pSearchType.selected} }}-->
+        </div>
+        <div class="bottom-line"></div>
+        <div class="form-inline">
+            <div class="form-group">
+                <span>Price ($): between</span>
+            </div>
+            <div class="form-group">
+                <input type="text" ng-model="search.pPriceLow" class="form-control" style="width:120px;" id="txtPriceLow" placeholder="Low" ng-focus="errorMessage=''">
+            </div>
+            <div class="form-group left-dent">
+                <span>and</span>
+            </div>
+            <div class="form-group">
+                <input type="text" ng-model="search.pPriceHigh" class="form-control" style="width:120px;" id="txtPriceHigh" placeholder="High" ng-focus="errorMessage=''">
+            </div>
+        </div>
+        <div class="bottom-line"></div>
+        <div class="form-inline">
+            <div class="form-group">
+                <span>First available: from</span>
+            </div>
+            <!--<div class="form-group input-append date first-avail" data-date-format="mm/dd/yyyy">-->
+            <div class="form-group input-append date first-avail">
+                <input type="text" ng-model="search.pAvailableFrom" class="form-control" style="width:100px;" id="txtFirstAvailFrom" placeholder="Date from"
+                       datepicker-popup="{{format}}" is-open="openedFrom" min-date="'2000-01-01'" max-date="'2020-12-31'" datepicker-options="dateOptions"
+                       show-button-bar="false" ng-required="true" ng-focus="errorMessage=''">
+                <!--<span class="add-on"><i class="glyphicon glyphicon-th"></i></span>-->
+                <span>
+                    <button type="button" class="btn btn-default height-to-form-comtrol" ng-click="openFrom($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>
+            <div class="form-group left-dent">
+                <span>to</span>
+            </div>
+            <div class="form-group input-append date first-avail">
+                <input type="text" ng-model="search.pAvailableTo" class="form-control" style="width:100px;" id="txtFirstAvailTo" placeholder="Date to"
+                       datepicker-popup="{{format}}" is-open="openedTo" min-date="'2000-01-01'" max-date="'2020-12-31'" datepicker-options="dateOptions"
+                       show-button-bar="false" ng-required="true" ng-focus="errorMessage=''">
+                <span>
+                    <button type="button" class="btn btn-default height-to-form-comtrol" ng-click="openTo($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="bottom-line">
+        </div>
+        <div class="form-inline">
+            <div class="form-group">
+                <span>Product status:</span>
+            </div>
+            <div class="form-group">            
+                <select id="ddlProductStatusType" class="form-control"
+                        ng-class="{'placeholder-color':model.pStatusType.selected=='0', 'control-color': model.pStatusType.selected !='0' }"
+                        style="width: 150px;"
+                        ng-model="model.pStatusType.selected"
+                        ng-focus="errorMessage=''">
+                    <option value="0" class="placeholder-color">Please select...</option>
+                    <option ng-selected="{{item.StatusCode == model.pStatusType}}"
+                            ng-repeat="item in model.productStatusTypes"
+                            value="{{item.StatusCode}}"
+                            class="control-color">
+                        {{item.Description}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group" style="margin-left:35px;">
+            </div>
+            <div class="form-group left-dent">
+                <button type="button" class="btn btn-primary" id="btnLoadProductList" ng-click="clickGo()">&#160;&#160;Go&#160;&#160;</button>
+            </div>
+            <div class="form-group" style="margin-left:20px;">
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-secondary" id="btnClear" ng-click="setDefaultSearchItems()">&#160;Clear&#160;</button>
+            </div>
+        </div>
+    </fieldset>    
+    <div ng-show="showProductList" style="padding-top:10px;">
+        <table ng-table="tableParams" template-pagination="/Templates/ngTablePager.html" class="table table-striped table-hover table-condensed bottom-border">
+            <tr ng-repeat="item in $data">
+                <td width="30" style="text-align:center" header="'ng-table/headers/checkbox.html'">
+                    <input type="checkbox" ng-model="checkboxes.items[$index]" ng-change="listCheckboxChange($index)" />
+                </td>
+                <td data-title="'Product Name'" sortable="'ProductName'" width="120px">                    
+                    <a ng-click="paging.openProductForm(item.ProductID)" class="cursor-pointer">{{item.ProductName}}</a>
+                </td>
+                <td data-title="'Category ID'" sortable="'CategoryID'" width="70px" align="center">{{item.CategoryID}}</td>
+                <td data-title="'Category Name'" sortable="'CategoryName'" width="100px">{{item.CategoryName}}</td>
+                <td data-title="'Unit Price ($)'" sortable="'UnitPrice'" width="80px" align="center">{{item.UnitPrice | number:2}}</td>
+                <td data-title="'Status'" sortable="'StatusDescription'" width="70px">{{item.StatusDescription}}</td>
+                <td data-title="'Available Since'" sortable="'AvailableSince'" width="80px">{{item.AvailableSince | date : "MM/dd/yyyy"}}</td>
+            </tr>
+        </table> 
+        <div style="padding-top:10px;">
+            <button type="button" class="btn btn-success" id="btnAddProduct" ng-disabled="hasEditItemChecked" ng-click="paging.openProductForm()">&#160;Add Product&#160;</button>
+            <button type="button" class="btn btn-success" style="margin-left:20px;" ng-disabled="!hasEditItemChecked" id="btnDeleteProducts" ng-click="deleteProducts()">&#160;Delete Products&#160;</button>
+        </div>                                    
+    </div>       
+</div>
+<!--Template for checkbox in header-->
+<script type="text/ng-template" id="ng-table/headers/checkbox.html">
+    <input type="checkbox" ng-model="checkboxes.topChecked" ng-disabled="checkboxes.topDisabled" ng-change="topCheckboxChange()" value="" />
+</script>
+

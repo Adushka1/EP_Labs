@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Unity.Interception" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EPAM.Models\EPAM_5.Models.csproj" />
+    <ProjectReference Include="..\EPAM_5.BLL\EPAM_5.BLL.csproj" />
+    <ProjectReference Include="..\EPAM_5.Common\EPAM_5.Common.csproj" />
+    <ProjectReference Include="..\EPAM_5.DAL\EPAM_5.DAL.csproj" />
+  </ItemGroup>
+
+</Project>
